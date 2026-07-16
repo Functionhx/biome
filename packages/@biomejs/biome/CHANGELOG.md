@@ -1,5 +1,44 @@
 # @biomejs/biome
 
+## 2.5.5
+
+### Patch Changes
+
+- [#10889](https://github.com/biomejs/biome/pull/10889) [`89526e3`](https://github.com/biomejs/biome/commit/89526e3858c437408ec9ff192c35a866ad991d1b) Thanks [@denbezrukov](https://github.com/denbezrukov)! - Fixed CSS formatter casing for syntax-owned names while preserving author-defined names, including scoped keyframes and container scroll-state queries.
+
+  ```diff
+  - A:HOVER { COLOR: INITIAL; }
+  + A:hover { color: initial; }
+  - @KEYFRAMES :GLOBAL KeepFrames { FROM { COLOR: RED; } }
+  + @keyframes :GLOBAL KeepFrames { from { color: RED; } }
+  - @CONTAINER scroll-state((SCROLLED: TOP) AND (STUCK)) { A:HOVER { COLOR: RED; } }
+  + @container scroll-state((SCROLLED: TOP) AND (STUCK)) { A:hover { color: RED; } }
+  ```
+
+- [#10941](https://github.com/biomejs/biome/pull/10941) [`f787725`](https://github.com/biomejs/biome/commit/f7877258271e20523d5c673e62912fce1d85cd56) Thanks [@siketyan](https://github.com/siketyan)! - Fixed [`#10855`](https://github.com/biomejs/biome/issues/10855): Biome now supports parsing and formatting CSS custom media queries declared with [`@custom-media`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@custom-media).
+
+- [#10931](https://github.com/biomejs/biome/pull/10931) [`899c60d`](https://github.com/biomejs/biome/commit/899c60d506115b3f62030236cbd0901bf294e6ab) Thanks [@ematipico](https://github.com/ematipico)! - Fixed `check --write` command. Now the command reports code frame of the formatted code, if the formatter is enabled.
+
+- [#10962](https://github.com/biomejs/biome/pull/10962) [`f0a67f2`](https://github.com/biomejs/biome/commit/f0a67f2e56c0785595c5cf14a93dba5bb32acf2d) Thanks [@ematipico](https://github.com/ematipico)! - Biome no longer removes embedded styles and scripts in HTML files.
+
+- [#10915](https://github.com/biomejs/biome/pull/10915) [`b3b12b3`](https://github.com/biomejs/biome/commit/b3b12b3fe390feabbd9ba097922d6c7e56823406) Thanks [@Functionhx](https://github.com/Functionhx)! - Added the rule [`noNegationInEqualityCheck`](https://biomejs.dev/linter/rules/no-negation-in-equality-check/). The rule flags negated expressions on the left side of strict equality checks like `!foo === bar` — due to operator precedence this evaluates as `(!foo) === bar` which is almost always a mistake for `foo !== bar`.
+
+  The rule provides an unsafe fix that flips the operator.
+
+  ```js
+  // Invalid
+  !foo === bar;
+  !foo !== bar;
+
+  // Valid
+  foo !== bar;
+  foo === bar;
+  ```
+
+- [#10933](https://github.com/biomejs/biome/pull/10933) [`48a4abb`](https://github.com/biomejs/biome/commit/48a4abb99d41b1241b2a5812a12247b671d0dfed) Thanks [@ematipico](https://github.com/ematipico)! - Fixed [`useArrayFind`](https://biomejs.dev/linter/rules/use-array-find/) to recognize bigint zero indexes.
+
+- [#10931](https://github.com/biomejs/biome/pull/10931) [`899c60d`](https://github.com/biomejs/biome/commit/899c60d506115b3f62030236cbd0901bf294e6ab) Thanks [@ematipico](https://github.com/ematipico)! - Fixed an orchestration issue that could lead to deadlocks when type-aware rules are enabled.
+
 ## 2.5.4
 
 ### Patch Changes
